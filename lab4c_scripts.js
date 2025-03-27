@@ -69,6 +69,7 @@ function display_list() {
             <table border="1" style="width: 80%; text-align: center; border-collapse: collapse;">
                 <thead>
                     <tr>
+                        <th>Student Number</th>
                         <th>Name</th>
                         <th>Age</th>
                         <th>UP Email</th>
@@ -82,6 +83,7 @@ function display_list() {
     Object.values(student_list).forEach(student => {
         tableHTML += `
             <tr>
+                <td>${student.studentNumber}</td>
                 <td>${student.name}</td>
                 <td>${student.age}</td>
                 <td>${student.upMail}</td>
