@@ -4,8 +4,22 @@
         <title>JUSHENNA-LAB4C</title>
         <script src = "script.js"></script>
     </head>
+    <body>
+        <button onclick = "time_now()">Show Current Date</button>
 
-    <button onClick = "time_now()">Show Current Date</button>
+        <div id="search_student">
+            <h1><strong>Search Student</strong></h1>
+            <label for="name">Search Student Number:</label><br><br>
+            <input type="text" id="name" name="name"><br><br><br>
+
+            <button onclick="find_student()">Search</button>
+        </div>
+
+        <div id ="display">
+            <button onclick="display_list()">Display All</button>
+        </div>
+        
+    </body>
 
 
 </html>
