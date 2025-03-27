@@ -29,55 +29,75 @@ function time_now() {
   
 }
 
-function add_student(){
-    //code
-}
-
 function generateStudentNumber() {
     let randomDigits = Math.floor(Math.random() * 90000) + 10000;
     studentNumber = `2023${randomDigits}`;
     return studentNumber;
 }
-console.log(generateStudentNumber());
+
+function add_student(form){
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+    let upMail = document.getElementById("upMail").value;
+    let course = document.getElementById("course").value;
+
+    //CHECKERS
+    if (!upMail.includes("@up.edu.ph")) {
+        alert("Must be a UP email address.");
+        return;
+    }
+
+    if (!name || !age || !upMail || course === "blank") {
+        alert("Please fill in all fields correctly.");
+        return;
+    }
+
+    let studentNumber = generateStudentNumber();
+    student_list[studentNumber] = { studentNumber, name, age, upMail, course };
+
+    document.getElementById("addStudent").reset();
+    return false;
+}
 
 function find_student(){
     //code
 }
 
-
-function display_list(){
-    let tableHTML = "<table>";
-
-    // Create table headers
-    //<th>Student Number</th>
-    tableHTML += `
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>UP Email</th>
-                <th>Course</th>
-            </tr>
-        </thead>
-        <tbody>
+function display_list() {
+    let tableHTML = `
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+            <table border="1" style="width: 80%; text-align: center; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>UP Email</th>
+                        <th>Course</th>
+                    </tr>
+                </thead>
+                <tbody>
     `;
 
-    // will iterate through each instance of student to be placed as a row
-    //              <td>${student_list.sn}</td>
+    // Loop through student_list and display each student in the table
     Object.values(student_list).forEach(student => {
         tableHTML += `
             <tr>
-                <td>${student_list.name}</td>
-                <td>${student_list.age}</td>
-                <td>${student_list.upMail}</td>
-                <td>${student_list.course}</td>
+                <td>${student.name}</td>
+                <td>${student.age}</td>
+                <td>${student.upMail}</td>
+                <td>${student.course}</td>
             </tr>
         `;
     });
 
-    tableHTML += "</tbody></table>";
+    tableHTML += `
+                </tbody>
+            </table>
+        </div>
+    `;
 
     // Display the table inside the div
-    document.getElementById("display_students").innerHTML = tableHTML;
-}
+    document.getElementById("displayStudents").innerHTML = tableHTML;
 
+    console.log(student_list);
+}
