@@ -29,29 +29,8 @@ function time_now() {
   
 }
 
-function add_student(form){
-    let name = document.getElementById("name").value;
-    let age = document.getElementById("age").value;
-    let upMail = document.getElementById("upMail").value;
-    let course = document.getElementById("course").value;
-
-    //CHECKERS
-    if (!upMail.includes("@up.edu.ph")) {
-        alert("Must be a UP email address.");
-        return;
-    }
-
-    if (!name || !age || !upMail || course === "blank") {
-        alert("Please fill in all fields correctly.");
-        return;
-    }
-
-    // insert function for creating student id via Julia
-    // note to shen: chenge [name] to studentID    
-    student_list[name] = { name, age, upMail, course };
-
-    document.getElementById("addStudent").reset();
-    return false;
+function add_student(){
+    //code
 }
 
 function generateStudentNumber() {
