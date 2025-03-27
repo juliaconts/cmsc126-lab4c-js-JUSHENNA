@@ -5,7 +5,7 @@ student = {
     name: "Julia Contreras",
     studentNumber: 202350056,
     age: 20,
-    email: "jmcontreras3@up.edu.ph",
+    upMail: "jmcontreras3@up.edu.ph",
     course: "BS Computer Repair Shop"
 };
 
