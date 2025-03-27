@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JUSHENNA-LAB4C</title>
+        <script src = "script.js"></script>
+    </head>
+
+    <body>
+        <div id="addStudent">
+            <center>
+                <h1>Add Student</h1>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+                <br><br>
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="18" max="99" required>
+                <br><br>
+
+                <label for="upMail">UP Email:</label>
+                <input type="text" id="upMail" name="upMail">
+                <br><br>
+
+                <label for="course">Course:</label>
+                <select name="course" id="course">
+                    <option value="blank">Select your course</option>
+                    <option value="foodApp">BA Food Appreciation</option>
+                    <option value="poetFuture">BA Applied Poetry of the Future</option>
+                    <option value="compRep">BS Computer Repair Shop</option>
+                    <option value="vidGame">BS Video Gaming</option>
+                    <option value="installDown">BS Installing and Downloading</option>
+                </select>
+
+                <br><br>
+                <button type="button">Submit</button>
+            </center>
+        </div>
+    </body>
+</html>
