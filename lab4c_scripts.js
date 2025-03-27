@@ -8,9 +8,12 @@ function time_now() {
     var dateFormat = date.toLocaleDateString("en-US", day) + ", " + date.toLocaleDateString("en-US", weekday);
     var timeFormat = date.toLocaleTimeString("en-US", time);
 
-    // for the sake of confirmation, to be deleted when button is connected to function
-    console.log("Today is " + dateFormat + ".");
-    console.log("The current time is " + timeFormat + ".");
+    // for the sake of confirmation in console
+    //console.log("Today is " + dateFormat + ".");
+    //console.log("The current time is " + timeFormat + ".");
+
+    document.getElementById("timeDisplay").innerHTML = `Today is ${dateFormat}.<br>The current time is ${timeFormat}.`;
+  
 }
 
 
