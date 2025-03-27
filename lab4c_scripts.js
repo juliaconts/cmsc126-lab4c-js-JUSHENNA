@@ -1,3 +1,8 @@
+// insert here const object Student
+var student_list = {}
+
+
+
 // to show date when button is pressed
 function time_now() {
     var day     = {timeZone: 'Asia/Singapore', month: 'long', day: 'numeric', year: 'numeric'};
@@ -16,9 +21,28 @@ function time_now() {
   
 }
 
+function add_student(form){
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+    let upMail = document.getElementById("upMail").value;
+    let course = document.getElementById("course").value;
 
-function add_student(){
-    //code
+    if (!upMail.includes("@up.edu.ph")) {
+        alert("Must be a UP email address.");
+        return;
+    }
+
+    if (!name || !age || !upMail || course === "blank") {
+        alert("Please fill in all fields correctly.");
+        return;
+    }
+
+    // insert function for creating student id via Julia
+    // note to shen: chenge [name] to studentID    
+    student_list[name] = { name, age, upMail, course };
+
+    document.getElementById("addStudent").reset();
+    return false;
 }
 
 
@@ -28,8 +52,7 @@ function find_student(){
 
 
 function display_list(){
-    //code
+    // currently being done by nina
+    console.log(student_list);
 }
 
-
-// insert here const object Student

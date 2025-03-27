@@ -13,7 +13,7 @@
             <div id = "timeDisplay"></div>
         </div>
 
-        <div id="addStudent">
+        <form id="addStudent">
             <center>
                 <h1>Add Student</h1>
                 <label for="name">Name:</label>
@@ -39,9 +39,9 @@
                 </select>
 
                 <br><br>
-                <button type="button">Submit</button>
+                <button type="button" onclick="return add_student(form)">Submit</button>
             </center>
-        </div>
+        </form>
 
         <div id="search_student" style="text-align: center;">
             <h1><strong>Search Student</strong></h1>
