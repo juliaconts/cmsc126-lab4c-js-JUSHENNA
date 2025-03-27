@@ -45,6 +45,12 @@ function add_student(form){
     return false;
 }
 
+function generateStudentNumber() {
+    let randomDigits = Math.floor(Math.random() * 90000) + 10000;
+    studentNumber = 2023${randomDigits};
+    return studentNumber;
+}
+console.log(generateStudentNumber());
 
 function find_student(){
     //code
@@ -53,6 +59,42 @@ function find_student(){
 
 function display_list(){
     // currently being done by nina
-    console.log(student_list);
+    
+function display_list(){
+    let tableHTML = "<table>";
+
+    // Create table headers
+    //<th>Student Number</th>
+    tableHTML += `
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>UP Email</th>
+                <th>Course</th>
+            </tr>
+        </thead>
+        <tbody>
+    `;
+
+    // will iterate through each instance of student to be placed as a row
+    //              <td>${student_list.sn}</td>
+    Object.values(student_list).forEach(student => {
+        tableHTML += `
+            <tr>
+                <td>${student_list.name}</td>
+                <td>${student_list.age}</td>
+                <td>${student_list.upMail}</td>
+                <td>${student_list.course}</td>
+            </tr>
+        `;
+    });
+
+    tableHTML += "</tbody></table>";
+
+    // Display the table inside the div
+    document.getElementById("display_students").innerHTML = tableHTML;
+}
+
 }
 

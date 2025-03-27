@@ -13,7 +13,7 @@
             <div id = "timeDisplay"></div>
         </div>
 
-        <form id="addStudent">
+        <form id="add">
             <center>
                 <h1>Add Student</h1>
                 <label for="name">Name:</label>
@@ -40,23 +40,23 @@
 
                 <br><br>
                 <button type="button" onclick="return add_student(form)">Submit</button>
-                <div id = add_student></div>
+                <div id = addStudent></div>
             </center>
         </form>
 
-        <div id="search_student" style="text-align: center;">
+        <div id="search" style="text-align: center;">
             <h1><strong>Search Student</strong></h1>
             <label for="name">Search Student Number:</label><br><br>
             <input type="text" id="name" name="name"><br><br><br>
 
             <button onclick="find_student()">Search</button>
-            <div id = "studentSearch"></div>
+            <div id = "searchStudent"></div>
         </div>
 
         <div id ="display" style="text-align: center;">
             <h1><strong>Display All Students</strong></h1>
             <button onclick="display_list()">Display All</button>
-            <div id="display_students"></div>
+            <div id="displayStudents"></div>
         </div>
     </body>
 </html>
