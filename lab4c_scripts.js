@@ -58,9 +58,6 @@ function find_student(){
 
 
 function display_list(){
-    // currently being done by nina
-    
-function display_list(){
     let tableHTML = "<table>";
 
     // Create table headers
