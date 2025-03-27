@@ -1,7 +1,15 @@
 // insert here const object Student
 var student_list = {}
 
+student = {
+    name: "Julia Contreras",
+    studentNumber: 202350056,
+    age: 20,
+    email: "jmcontreras3@up.edu.ph",
+    course: "BS Computer Repair Shop"
+};
 
+student_list[student.studentNumber] = student;
 
 // to show date when button is pressed
 function time_now() {
@@ -27,6 +35,7 @@ function add_student(form){
     let upMail = document.getElementById("upMail").value;
     let course = document.getElementById("course").value;
 
+    //CHECKERS
     if (!upMail.includes("@up.edu.ph")) {
         alert("Must be a UP email address.");
         return;
@@ -47,7 +56,7 @@ function add_student(form){
 
 function generateStudentNumber() {
     let randomDigits = Math.floor(Math.random() * 90000) + 10000;
-    studentNumber = 2023${randomDigits};
+    studentNumber = `2023${randomDigits}`;
     return studentNumber;
 }
 console.log(generateStudentNumber());
@@ -55,10 +64,6 @@ console.log(generateStudentNumber());
 function find_student(){
     //code
 }
-
-
-function display_list(){
-    // currently being done by nina
     
 function display_list(){
     let tableHTML = "<table>";
@@ -94,7 +99,5 @@ function display_list(){
 
     // Display the table inside the div
     document.getElementById("display_students").innerHTML = tableHTML;
-}
-
 }
 
