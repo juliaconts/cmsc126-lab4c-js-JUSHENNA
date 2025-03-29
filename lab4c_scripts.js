@@ -75,7 +75,7 @@ function find_student(){
         let student = student_list[searchTerm];
     
         if (!student) {
-            alert("No student found with this student number.");
+            alert("Student record does not exist.");
             return;
         }
     
