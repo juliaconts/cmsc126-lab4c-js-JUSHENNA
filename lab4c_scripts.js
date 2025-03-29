@@ -60,8 +60,52 @@ function add_student(form){
 }
 
 function find_student(){
-    //code
-}
+        let searchTerm = document.getElementById("studentNumber").value.trim();
+    
+        if (!searchTerm) {
+            alert("Please enter a student number.");
+            return;
+        }
+
+        if (searchTerm.length != 9){
+            alert("The student number must contain 9 integers");
+            return;
+        }
+    
+        let student = student_list[searchTerm];
+    
+        if (!student) {
+            alert("No student found with this student number.");
+            return;
+        }
+    
+        let tableHTML = `
+            <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+                <table border="1" style="width: 80%; text-align: center; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>Student Number</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>UP Email</th>
+                            <th>Course</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>${student.studentNumber}</td>
+                            <td>${student.name}</td>
+                            <td>${student.age}</td>
+                            <td>${student.upMail}</td>
+                            <td>${student.course}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        `;
+
+        document.getElementById("searchStudent").innerHTML = tableHTML;
+    }    
 
 function display_list() {
     let tableHTML = `
