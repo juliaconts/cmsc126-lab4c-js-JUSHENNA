@@ -68,7 +68,7 @@ function find_student(){
         }
 
         if (searchTerm.length != 9){
-            alert("The student number must contain 9 integers");
+            alert("The student number must contain 9 integers.");
             return;
         }
     
