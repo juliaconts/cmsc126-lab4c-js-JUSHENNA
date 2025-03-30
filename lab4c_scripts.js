@@ -26,7 +26,6 @@ function time_now() {
     //console.log("The current time is " + timeFormat + ".");
 
     document.getElementById("timeDisplay").innerHTML = `Today is ${dateFormat}.<br>The current time is ${timeFormat}.`;
-  
 }
 
 function generateStudentNumber() {
@@ -52,8 +51,51 @@ function add_student(form){
         return;
     }
 
-    let studentNumber = generateStudentNumber();
-    student_list[studentNumber] = { studentNumber, name, age, upMail, course };
+    if (age < 18 || age > 99){
+        alert("Please enter an age not less than 18 and not more than 99.");
+        return;
+    }
+
+    if (name.length < 5){
+        alert("Names must be more than five (5) characters.");
+        return;
+    }
+
+    name = name.trim();
+    //naming patterns
+    const regex = /\s/;
+    const regex2 =/^\w+(-?\w+)*( \w+(-?\w+)*)*$/;
+
+    //checks if full name
+    if (!regex.test(name)){
+        alert("Please enter a full name (first and last name).");
+        return;
+    }
+
+    //checks if each word has one whitespace in between
+    if (!regex2.test(name)){
+        alert("Input must contain only one whitespace in between your name.");
+        return;
+    }
+
+    let genStudentNumber = generateStudentNumber();
+    let exists = Object.values(student_list).find(student => student.studentNumber === genStudentNumber);
+
+    while (exists) {
+        console.log("Student number already exists");
+        genStudentNumber = generateStudentNumber();
+    }
+
+    student_list[genStudentNumber] = {genStudentNumber, name, age, upMail, course};
+
+    alert(
+        "Student Added Successfully!" + "\n" +
+        "Student Number: " + genStudentNumber + "\n" +
+        "Name: " + name + "\n" +
+        "Age: " + age + "\n" +
+        "Email: " + upMail + "\n" + 
+        "Course: " + course 
+    );
 
     document.getElementById("addStudent").reset();
     return false;
@@ -93,7 +135,7 @@ function find_student(){
                     </thead>
                     <tbody>
                         <tr>
-                            <td>${student.studentNumber}</td>
+                            <td>${student.studentNumber || student.genStudentNumber}</td>
                             <td>${student.name}</td>
                             <td>${student.age}</td>
                             <td>${student.upMail}</td>
@@ -127,7 +169,7 @@ function display_list() {
     Object.values(student_list).forEach(student => {
         tableHTML += `
             <tr>
-                <td>${student.studentNumber}</td>
+                <td>${student.genStudentNumber || student.studentNumber}</td>
                 <td>${student.name}</td>
                 <td>${student.age}</td>
                 <td>${student.upMail}</td>
