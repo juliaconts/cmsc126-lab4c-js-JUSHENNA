@@ -1,32 +1,16 @@
+function Student(name, studentNumber, age, upMail, course){
+    this.name = name;
+    this.studentNumber = studentNumber;
+    this.age = age;
+    this.upMail = upMail;
+    this.course = course;
+}
+
 var student_list = {}
-// for the sake of having already existing data in database
-student1 = {
-    name: "Julia Contreras",
-    studentNumber: 202350056,
-    age: 20,
-    upMail: "jmcontreras3@up.edu.ph",
-    course: "BS Computer Repair Shop"
-};
-student2 = {
-    name: "Nina Del Rosario",
-    studentNumber: 202309989,
-    age: 19,
-    upMail: "nedelrosario@up.edu.ph",
-    course: "BA Food Appreciation"
-};
-student3 = {
-    name: "Hansen Quindao",
-    studentNumber: 202300102,
-    age: 20,
-    upMail: "hcquindao@up.edu.ph",
-    course: "BS Installing and Downloading"
-};
 
-student_list[student1.studentNumber] = student1;
-student_list[student2.studentNumber] = student2;
-student_list[student3.studentNumber] = student3;
-
-
+student_list[202350056] = new Student("Julia Contreras", 202350056, 20,"jmcontreras3@up.edu.ph", "BS Computer Repair Shop");
+student_list[202309989] = new Student("Nina Del Rosario", 202309989, 19,"nedelrosario@up.edu.ph", "BA Food Appreciation");
+student_list[202300102] = new Student("Hansen Quindao", 202300102, 20, "hcquindao1@up.edu.ph", "BS Installing and Downloading");
 
 // to show date when button is pressed
 function time_now() {
@@ -53,10 +37,15 @@ function generateStudentNumber() {
 }
 
 // error message for checkers used in add_student
-function showError(message){
-    document.getElementById("error-message").innerText = message;
+function showError(inputId, message){
+    document.getElementById("error-" + inputId).innerText = message;
 }
 
+function clearErrors(){
+    showError("name", "");
+    showError("age", "");
+    showError("upMail", "");
+}
 
 function add_student(form){
     let name = document.getElementById("name").value;
@@ -64,45 +53,47 @@ function add_student(form){
     let upMail = document.getElementById("upMail").value;
     let course = document.getElementById("course").value;
 
-    showError("");
+    clearErrors();
+
+    let hasError = false;
 
     //checker for name length
     if (name.length < 5){
-        showError("Names must be more than five (5) characters.");
-        return false;
+        showError("name", "Names must be more than five (5) characters.");
+        hasError = true;
     }
 
     //checker for name
     name = name.trim();
     //naming patterns
     const regex = /\s/;
-    const regex2 =/^\w+(-?\w+)*( \w+(-?\w+)*)*$/;
+    const regex2 =/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+(-?[a-zA-ZñÑáéíóúÁÉÍÓÚ]+)*( [a-zA-ZñÑáéíóúÁÉÍÓÚ]+(-?[a-zA-ZñÑáéíóúÁÉÍÓÚ]+)*)*$/;
 
     //checker for full name
     if (!regex.test(name)){
-        showError("Please enter a full name (first and last name).");
-        return false;
+        showError("name", "Please enter a full name (first and last name).");
+        hasError = true;
     }
 
     //checker for if each word has one whitespace in between
     if (!regex2.test(name)){
-        showError("Input must contain at least one whitespace in between your name.");
-        return false;
+        showError("name", "Input must contain at least one whitespace in between your name.");
+        hasError = true;
     }
 
     //checker for age
     if (age < 18 || age > 99){
-        showError("Please enter an age not less than 18 and not more than 99");
-        return false;
+        showError("age", "Please enter an age not less than 18 and not more than 99");
+        hasError = true;
     }
 
     //checker for email
     if (!upMail.includes("@up.edu.ph")) {
-        showError("Must be a UP email address.");
-        return false;
+        showError("upMail", "Must be a UP email address.");
+        hasError = true;
     }
 
-    //no checker for age as its automatically in html
+    if (hasError) return false;
 
     //generation of student number
     let genStudentNumber = generateStudentNumber();
@@ -116,19 +107,21 @@ function add_student(form){
 
     //adding of object in student_list array
     studentNumber = parseInt(genStudentNumber, 10);
-    student_list[studentNumber] = {name, studentNumber, age, upMail, course};
+    let addedStudent = new Student(name, studentNumber, age, upMail, course);
+    student_list[addedStudent.studentNumber] = addedStudent;
 
     alert(
         "Student Added Successfully!" + "\n" +
-        "Student Number: " + studentNumber + "\n" +
-        "Name: " + name + "\n" +
-        "Age: " + age + "\n" +
-        "Email: " + upMail + "\n" + 
-        "Course: " + course 
+        "Student Number: " + addedStudent.studentNumber + "\n" +
+        "Name: " + addedStudent.name + "\n" +
+        "Age: " + addedStudent.age + "\n" +
+        "Email: " + addedStudent.upMail + "\n" + 
+        "Course: " + addedStudent.course 
     );
 
     //resets inputs to clear
     document.getElementById("addStudent").reset();
+    clearErrors();
     return false;
 }
 
