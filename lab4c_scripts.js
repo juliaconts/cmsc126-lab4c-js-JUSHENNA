@@ -60,22 +60,11 @@ function showError(message){
 
 function add_student(form){
     let name = document.getElementById("name").value;
-    let age = document.getElementById("age").value;
+    let age = parseInt(document.getElementById("age").value, 10);
     let upMail = document.getElementById("upMail").value;
     let course = document.getElementById("course").value;
 
     showError("");
-
-    //checkers
-    if (!upMail.includes("@up.edu.ph")) {
-        showError("Must be a UP email address.");
-        return false;
-    }
-
-    if (age < 18 || age > 99){
-        showError("Please enter an age not less than 18 and not more than 99.");
-        return false;
-    }
 
     if (name.length < 5){
         showError("Names must be more than five (5) characters.");
@@ -99,6 +88,17 @@ function add_student(form){
         return false;
     }
 
+    //checkers
+    if (!upMail.includes("@up.edu.ph")) {
+        showError("Must be a UP email address.");
+        return false;
+    }
+
+    if (age < 18 || age > 99){
+        showError("Please enter an age not less than 18 and not more than 99.");
+        return false;
+    }
+
     let genStudentNumber = generateStudentNumber();
     let exists = Object.values(student_list).find(student => student.studentNumber === genStudentNumber);
 
@@ -107,11 +107,12 @@ function add_student(form){
         genStudentNumber = generateStudentNumber();
     }
 
-    student_list[genStudentNumber] = {genStudentNumber, name, age, upMail, course};
+    studentNumber = parseInt(genStudentNumber, 10);
+    student_list[studentNumber] = {name, studentNumber, age, upMail, course};
 
     alert(
         "Student Added Successfully!" + "\n" +
-        "Student Number: " + genStudentNumber + "\n" +
+        "Student Number: " + studentNumber + "\n" +
         "Name: " + name + "\n" +
         "Age: " + age + "\n" +
         "Email: " + upMail + "\n" + 
@@ -142,35 +143,35 @@ function find_student(){
             document.getElementById("error-find-student").textContent.display = "none";
         }
     
-        let tableHTML = `
-            <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-                <table border="1" style="width: 80%; text-align: center; border-collapse: collapse;">
-                    <thead>
-                        <tr>
-                            <th>Student Number</th>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>UP Email</th>
-                            <th>Course</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>${student_list[searchTerm].studentNumber || student_list[searchTerm].genStudentNumber}</td>
-                            <td>${student_list[searchTerm].name}</td>
-                            <td>${student_list[searchTerm].age}</td>
-                            <td>${student_list[searchTerm].upMail}</td>
-                            <td>${student_list[searchTerm].course}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        `;
-
-        if (student_list[searchTerm]){
-            document.getElementById("searchStudent").innerHTML = tableHTML;
-        }else{
+        if (!student_list[searchTerm]){
             document.getElementById("searchStudent").innerHTML = "";
+        }
+        else {
+            let tableHTML = `
+                <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+                    <table border="1" style="width: 80%; text-align: center; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th>Student Number</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>UP Email</th>
+                                <th>Course</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${student_list[searchTerm].studentNumber}</td>
+                                <td>${student_list[searchTerm].name}</td>
+                                <td>${student_list[searchTerm].age}</td>
+                                <td>${student_list[searchTerm].upMail}</td>
+                                <td>${student_list[searchTerm].course}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            document.getElementById("searchStudent").innerHTML = tableHTML;
         }
     }    
 

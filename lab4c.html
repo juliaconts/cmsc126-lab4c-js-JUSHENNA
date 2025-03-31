@@ -13,7 +13,7 @@
             <div id = "timeDisplay"></div>
         </div>
 
-        <form id="addStudent">
+        <form id="addStudent" onsubmit="return add_student(this)">
             <center>
                 <h1>Add Student</h1>
                 <label for="name">Name:</label>
@@ -25,12 +25,11 @@
                 <br><br>
 
                 <label for="upMail">UP Email:</label>
-                <input type="text" id="upMail" name="upMail" required>
+                <input type="email" id="upMail" name="upMail" required>
                 <br><br>
                 
                 <label for="course">Course:</label>
                 <select name="course" id="course">
-                    <option value="blank">Select your course</option>
                     <option value="BA Food Appreciation">BA Food Appreciation</option>
                     <option value="BA Applied Poetry of the Future">BA Applied Poetry of the Future</option>
                     <option value="BS Computer Repair Shop">BS Computer Repair Shop</option>
@@ -39,7 +38,7 @@
                 </select>
 
                 <br><br>
-                <input type="submit" value="Submit" onsubmit="return add_student(form)">
+                <input type="submit" value="Submit">
                 <div id = addStudent></div>
                 <div id="error-message" style="color: red; font-size: medium; margin-top: 10px;"></div>
             </center>
@@ -49,9 +48,9 @@
             <h1><strong>Search Student</strong></h1>
             <label for="name">Search Student Number:</label><br><br>
             <input type="number" id="studentNumber" name="studentNumber"><br>
-            <div id="error-find-student" style="color: red; font-size: small;"></div>
+            <div id="error-find-student" style="color: red; font-size: small;"><br></div>
 
-            <br><br>
+            <br>
             <button onclick="find_student()">Search</button>
             <div id = "searchStudent"></div>
             
