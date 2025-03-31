@@ -105,20 +105,20 @@ function find_student(){
         let searchTerm = document.getElementById("studentNumber").value.trim();
     
         if (!searchTerm) {
-            alert("Please enter a student number.");
-            return;
+            document.getElementById("error-find-student").textContent = "Please enter a valid number";
+            document.getElementById("error-find-student").style.display = "block";
+        } 
+        else if (searchTerm.length != 9){
+            document.getElementById("error-find-student").textContent = "The student number must contain 9 integers.";
+            document.getElementById("error-find-student").style.display = "block";
+        } 
+        else if (!student_list[searchTerm]) {
+            document.getElementById("error-find-student").textContent = "Student record does not exist";
+            document.getElementById("error-find-student").style.display = "block";
         }
-
-        if (searchTerm.length != 9){
-            alert("The student number must contain 9 integers.");
-            return;
-        }
-    
-        let student = student_list[searchTerm];
-    
-        if (!student) {
-            alert("Student record does not exist.");
-            return;
+        else {
+            document.getElementById("error-find-student").textContent = "";
+            document.getElementById("error-find-student").textContent.display = "none";
         }
     
         let tableHTML = `
@@ -146,8 +146,13 @@ function find_student(){
             </div>
         `;
 
-        document.getElementById("searchStudent").innerHTML = tableHTML;
-    }    
+        if (student_list[searchTerm]){
+            document.getElementById("searchStudent").innerHTML = tableHTML;
+            return;
+        }else{
+            document.getElementById("searchStudent").innerHTML = "";
+        }
+}    
 
 function display_list() {
     let tableHTML = `
