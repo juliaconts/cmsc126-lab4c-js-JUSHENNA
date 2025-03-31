@@ -1,15 +1,32 @@
-// insert here const object Student
 var student_list = {}
-
-student = {
+// for the sake of having already existing data in database
+student1 = {
     name: "Julia Contreras",
     studentNumber: 202350056,
     age: 20,
     upMail: "jmcontreras3@up.edu.ph",
     course: "BS Computer Repair Shop"
 };
+student2 = {
+    name: "Nina Del Rosario",
+    studentNumber: 202309989,
+    age: 19,
+    upMail: "nedelrosario@up.edu.ph",
+    course: "BA Food Appreciation"
+};
+student3 = {
+    name: "Hansen Quindao",
+    studentNumber: 202300102,
+    age: 20,
+    upMail: "hcquindao@up.edu.ph",
+    course: "BS Installing and Downloading"
+};
 
-student_list[student.studentNumber] = student;
+student_list[student1.studentNumber] = student1;
+student_list[student2.studentNumber] = student2;
+student_list[student3.studentNumber] = student3;
+
+
 
 // to show date when button is pressed
 function time_now() {
@@ -28,15 +45,18 @@ function time_now() {
     document.getElementById("timeDisplay").innerHTML = `Today is ${dateFormat}.<br>The current time is ${timeFormat}.`;
 }
 
+// generation of student number
 function generateStudentNumber() {
     let randomDigits = Math.floor(Math.random() * 90000) + 10000;
     studentNumber = `2023${randomDigits}`;
     return studentNumber;
 }
 
+// error message for checkers used in add_student
 function showError(message){
     document.getElementById("error-message").innerText = message;
 }
+
 
 function add_student(form){
     let name = document.getElementById("name").value;
@@ -47,15 +67,6 @@ function add_student(form){
     showError("");
 
     //checkers
-    if (!name || !age || !upMail || course === "blank") {
-        showError("Please fill in all fields." + "\n"
-            + "Enter a full name (first and last name)." + "\n" 
-            + "Enter an age not less than 18 and not more than 99." + "\n"
-            + "Enter a UP email address."
-        );
-        return false;
-    }
-
     if (!upMail.includes("@up.edu.ph")) {
         showError("Must be a UP email address.");
         return false;
