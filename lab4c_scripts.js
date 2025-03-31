@@ -66,47 +66,49 @@ function add_student(form){
 
     showError("");
 
+    //checker for name length
     if (name.length < 5){
         showError("Names must be more than five (5) characters.");
         return false;
     }
 
+    //checker for name
     name = name.trim();
     //naming patterns
     const regex = /\s/;
     const regex2 =/^\w+(-?\w+)*( \w+(-?\w+)*)*$/;
 
-    //checks if full name
+    //checker for full name
     if (!regex.test(name)){
         showError("Please enter a full name (first and last name).");
         return false;
     }
 
-    //checks if each word has one whitespace in between
+    //checker for if each word has one whitespace in between
     if (!regex2.test(name)){
         showError("Input must contain only one whitespace in between your name.");
         return false;
     }
 
-    //checkers
+    //checker for email
     if (!upMail.includes("@up.edu.ph")) {
         showError("Must be a UP email address.");
         return false;
     }
 
-    if (age < 18 || age > 99){
-        showError("Please enter an age not less than 18 and not more than 99.");
-        return false;
-    }
+    //no checker for age as its automatically in html
 
+    //generation of student number
     let genStudentNumber = generateStudentNumber();
     let exists = Object.values(student_list).find(student => student.studentNumber === genStudentNumber);
 
+    //checker for studentNumber duplicates
     while (exists) {
         console.log("Student number already exists");
         genStudentNumber = generateStudentNumber();
     }
 
+    //adding of object in student_list array
     studentNumber = parseInt(genStudentNumber, 10);
     student_list[studentNumber] = {name, studentNumber, age, upMail, course};
 
@@ -119,21 +121,26 @@ function add_student(form){
         "Course: " + course 
     );
 
+    //resets inputs to clear
     document.getElementById("addStudent").reset();
     return false;
 }
 
+// student searching
 function find_student(){
         let searchTerm = document.getElementById("studentNumber").value.trim();
-    
+
+        //checker for no input
         if (!searchTerm) {
             document.getElementById("error-find-student").textContent = "Please enter a valid number";
             document.getElementById("error-find-student").style.display = "block";
         } 
+        //checker for valid student number length
         else if (searchTerm.length != 9){
             document.getElementById("error-find-student").textContent = "The student number must contain 9 integers.";
             document.getElementById("error-find-student").style.display = "block";
         } 
+        //checker for existing student number
         else if (!student_list[searchTerm]) {
             document.getElementById("error-find-student").textContent = "Student record does not exist";
             document.getElementById("error-find-student").style.display = "block";
@@ -142,7 +149,8 @@ function find_student(){
             document.getElementById("error-find-student").textContent = "";
             document.getElementById("error-find-student").textContent.display = "none";
         }
-    
+
+        //displaying of table
         if (!student_list[searchTerm]){
             document.getElementById("searchStudent").innerHTML = "";
         }
@@ -175,6 +183,7 @@ function find_student(){
         }
     }    
 
+//displaying of database
 function display_list() {
     let tableHTML = `
         <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
