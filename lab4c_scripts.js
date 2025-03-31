@@ -1,14 +1,6 @@
 // insert here const object Student
 var student_list = {}
 
-student = {
-    name: "Julia Contreras",
-    studentNumber: 202350056,
-    age: 20,
-    upMail: "jmcontreras3@up.edu.ph",
-    course: "BS Computer Repair Shop"
-};
-
 student_list[student.studentNumber] = student;
 
 // to show date when button is pressed
@@ -145,18 +137,22 @@ function find_student(){
                     </thead>
                     <tbody>
                         <tr>
-                            <td>${student.studentNumber || student.genStudentNumber}</td>
-                            <td>${student.name}</td>
-                            <td>${student.age}</td>
-                            <td>${student.upMail}</td>
-                            <td>${student.course}</td>
+                            <td>${student_list[searchTerm].studentNumber || student_list[searchTerm].genStudentNumber}</td>
+                            <td>${student_list[searchTerm].name}</td>
+                            <td>${student_list[searchTerm].age}</td>
+                            <td>${student_list[searchTerm].upMail}</td>
+                            <td>${student_list[searchTerm].course}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         `;
 
-        document.getElementById("searchStudent").innerHTML = tableHTML;
+        if (student_list[searchTerm]){
+            document.getElementById("searchStudent").innerHTML = tableHTML;
+        }else{
+            document.getElementById("searchStudent").innerHTML = "";
+        }
     }    
 
 function display_list() {
