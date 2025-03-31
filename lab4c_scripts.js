@@ -86,7 +86,13 @@ function add_student(form){
 
     //checker for if each word has one whitespace in between
     if (!regex2.test(name)){
-        showError("Input must contain only one whitespace in between your name.");
+        showError("Input must contain at least one whitespace in between your name.");
+        return false;
+    }
+
+    //checker for age
+    if (age < 18 || age > 99){
+        showError("Please enter an age not less than 18 and not more than 99");
         return false;
     }
 
