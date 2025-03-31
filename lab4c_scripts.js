@@ -34,31 +34,41 @@ function generateStudentNumber() {
     return studentNumber;
 }
 
+function showError(message){
+    document.getElementById("error-message").innerText = message;
+}
+
 function add_student(form){
     let name = document.getElementById("name").value;
     let age = document.getElementById("age").value;
     let upMail = document.getElementById("upMail").value;
     let course = document.getElementById("course").value;
 
-    //CHECKERS
-    if (!upMail.includes("@up.edu.ph")) {
-        alert("Must be a UP email address.");
-        return;
+    showError("");
+
+    //checkers
+    if (!name || !age || !upMail || course === "blank") {
+        showError("Please fill in all fields." + "\n"
+            + "Enter a full name (first and last name)." + "\n" 
+            + "Enter an age not less than 18 and not more than 99." + "\n"
+            + "Enter a UP email address."
+        );
+        return false;
     }
 
-    if (!name || !age || !upMail || course === "blank") {
-        alert("Please fill in all fields correctly.");
-        return;
+    if (!upMail.includes("@up.edu.ph")) {
+        showError("Must be a UP email address.");
+        return false;
     }
 
     if (age < 18 || age > 99){
-        alert("Please enter an age not less than 18 and not more than 99.");
-        return;
+        showError("Please enter an age not less than 18 and not more than 99.");
+        return false;
     }
 
     if (name.length < 5){
-        alert("Names must be more than five (5) characters.");
-        return;
+        showError("Names must be more than five (5) characters.");
+        return false;
     }
 
     name = name.trim();
@@ -68,14 +78,14 @@ function add_student(form){
 
     //checks if full name
     if (!regex.test(name)){
-        alert("Please enter a full name (first and last name).");
-        return;
+        showError("Please enter a full name (first and last name).");
+        return false;
     }
 
     //checks if each word has one whitespace in between
     if (!regex2.test(name)){
-        alert("Input must contain only one whitespace in between your name.");
-        return;
+        showError("Input must contain only one whitespace in between your name.");
+        return false;
     }
 
     let genStudentNumber = generateStudentNumber();
@@ -146,13 +156,8 @@ function find_student(){
             </div>
         `;
 
-        if (student_list[searchTerm]){
-            document.getElementById("searchStudent").innerHTML = tableHTML;
-            return;
-        }else{
-            document.getElementById("searchStudent").innerHTML = "";
-        }
-}    
+        document.getElementById("searchStudent").innerHTML = tableHTML;
+    }    
 
 function display_list() {
     let tableHTML = `
